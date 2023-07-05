@@ -1,17 +1,12 @@
-import logo from "./images/logo.svg";
+
 import "./App.css";
+import Header from "./Header.jsx";
 
 function App() {
   return (
     <body className="page">
-      <header className="header">
-        <img
-          className="header__logo"
-          src="<%=require('./images/logo.svg')%>"
-          alt="логотип"
-        />
-      </header>
-
+      <Header />
+      
       <main className="content">
         <section className="profile">
           <div className="profile__profile-info">
