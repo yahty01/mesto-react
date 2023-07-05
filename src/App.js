@@ -3,7 +3,7 @@ import "./App.css";
 
 function App() {
   return (
-    <body className="page">
+    <>
       <header className="header">
         <img
           className="header__logo"
@@ -214,7 +214,7 @@ function App() {
           </div>
         </div>
       </template>
-    </body>
+    </>
   );
 }
 
