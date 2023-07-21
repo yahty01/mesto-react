@@ -12,6 +12,12 @@ function EditAvatarPopup(props) {
     onUpdateAvatar(avatar.current.value);
   }
 
+  React.useEffect(() => {
+    if (!isOpen) {
+      avatar.current.value = ""; // Очищаем поле ввода ссылки при закрытии попапа
+    }
+  }, [isOpen]);
+
   return (
     <PopupWithForm
       isOpen={isOpen}
@@ -19,8 +25,7 @@ function EditAvatarPopup(props) {
       onSubmit={handleSubmit}
       title="Обновить аватар"
       name="update-avatar"
-      buttonText="Создать"
-      children={
+      buttonText="Создать">
         <>
           <input
             type="URL"
@@ -34,8 +39,7 @@ function EditAvatarPopup(props) {
           />
           <span id="error-AvatarLink" className="form__error"></span>
         </>
-      }
-    />
+      </PopupWithForm>
   );
 }
 

@@ -24,6 +24,14 @@ function AddPlacePopup(props) {
     });
   }
 
+  React.useEffect(() => {
+    if (!isOpen) {
+      // Сброс значений полей при закрытии попапа
+      setName("");
+      setLink("");
+    }
+  }, [isOpen]);
+
   return (
     <PopupWithForm
       isOpen={isOpen}
@@ -32,7 +40,7 @@ function AddPlacePopup(props) {
       title="Новое место"
       name="cards"
       buttonText={buttonText}
-      children={
+      >
         <>
           <input
             type="text"
@@ -61,8 +69,8 @@ function AddPlacePopup(props) {
           />
           <span id="error-profileLink" className="form__error" />
         </>
-      }
-    />
+      
+      </PopupWithForm>
   );
 }
 

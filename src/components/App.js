@@ -34,25 +34,28 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+      })
+      .catch((error) => {
+        console.error("Произошла ошибка при изменении статуса лайка:", error);
+      });
   }
 
   function handleCardDelete(card) {
-    api
-      .deleteCard(card._id)
+    api.deleteCard(card._id)
       .then(() => {
         const updatedCards = cards.slice().filter((c) => c !== card);
         setCards(updatedCards);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Произошла ошибка при удалении карточки:", error);
+      });
   }
-
   function handleUpdateUser(data) {
     setIsLoading(true);
-    api
-      .editProfile(data)
+    api.editProfile(data)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
@@ -60,23 +63,25 @@ function App() {
       .finally(() => {
         setIsLoading(false);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Произошла ошибка при обновлении профиля:", error);
+      });
   }
 
   function handleUpdateAvatar(url) {
-    api
-      .changeAvatar(url)
+    api.changeAvatar(url)
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Произошла ошибка при обновлении аватара:", error);
+      });
   }
 
   function handleAddPlaceSubmit(data) {
     setIsLoading(true);
-    api
-      .editCard(data)
+    api.editCard(data)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -84,7 +89,9 @@ function App() {
       .finally(() => {
         setIsLoading(false);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Произошла ошибка при добавлении карточки:", error);
+      });
   }
 
   function handleCardClick(card) {
